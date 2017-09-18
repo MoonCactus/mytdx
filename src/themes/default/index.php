@@ -281,7 +281,7 @@ $().ready(function(){
 <div id="space"></div>
 </div>
 
-<div id="footer"><div id="footer_content">Powered by <strong><a href="http://www.mytinytodo.net/">myTinyTodo</a></strong> @VERSION </div></div>
+<div id="footer"><div id="footer_content">Powered by <strong><a href="https://github.com/MoonCactus/myTDX">myTDX</a></strong> @VERSION </div></div>
 
 </div>
 </body>
