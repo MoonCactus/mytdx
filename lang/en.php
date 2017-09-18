@@ -4,10 +4,10 @@
 	myTinyTodo language pack
 	Language: English
 	Original name: English
-	Author: Max Pozdeev
-	Author Url: http://www.mytinytodo.net
-	AppVersion: v1.4.2
-	Date: 2011-03-21
+	Author: Max Pozdeev & Jeremie Francois
+	Author Url: http://www.mytinytodo.net & www.tecrd.com
+	AppVersion: v1.5.0
+	Date: 2017/09/18
 */
 
 class Lang extends DefaultLang

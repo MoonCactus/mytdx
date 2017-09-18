@@ -1,9 +1,8 @@
 <?php
 
 /*
-	This file is part of myTinyTodo.
-	(C) Copyright 2009-2010 Max Pozdeev <maxpozdeev@gmail.com>
-	(C) Copyright 2017 Jeremie Francois <jeremie.francois@gmail.com>
+	(C) Copyright 2009-2010 myTinyTodo by Max Pozdeev <maxpozdeev@gmail.com>
+	(C) Copyright 2017      fork myTDX by Jérémie FRANCOIS <jeremie.francois@gmail.com>
 	Licensed under the GNU GPL v2 license. See file COPYRIGHT for details.
 */ 
 

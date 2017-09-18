@@ -1,6 +1,6 @@
 /*
-	This file is a part of myTinyTodo.
-	(C) Copyright 2010 Max Pozdeev <maxpozdeev@gmail.com>
+	(C) Copyright 2009-2010 myTinyTodo by Max Pozdeev <maxpozdeev@gmail.com>
+	(C) Copyright 2017      fork myTDX by Jérémie FRANCOIS <jeremie.francois@gmail.com>
 	Licensed under the GNU GPL v2 license. See file COPYRIGHT for details.
 */
 

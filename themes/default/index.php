@@ -16,6 +16,7 @@
 <link rel="stylesheet" type="text/css" href="<?php mttinfo('template_url'); ?>print.css?v=1.4.3" media="print" />
 <link rel="shortcut icon" href="https://www.tecrd.com/td/favicon.ico" />
 <?php endif; ?>
+<meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=2.0, user-scalable=no" />
 </head>
 
 <body>
@@ -289,7 +290,7 @@ $().ready(function(){
 <div id="space"></div>
 </div>
 
-<div id="footer"><div id="footer_content">Powered by <strong><a href="https://github.com/MoonCactus/myTDX/">myTDX</a></strong> 1.5.0 by </div></div>
+<div id="footer"><div id="footer_content">Powered by <strong><a href="https://github.com/MoonCactus/myTDX/">myTDX</a></strong> 1.5.0</div></div>
 
 </div>
 </body>
