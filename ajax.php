@@ -111,13 +111,19 @@ elseif(isset($_GET['loadTasks']))
 		}
 	}
 
-	$s = trim(_get('s'));
-	if($s != '')
+	$s = trim(_get('i'));
+	if($s!='') // GET search for taskid
+		$sqlWhere .= " AND (id = ".(1*$s)." )";
+	else
 	{
-		if($s[0]=='=')
-			$sqlWhere .= " AND (id = ".(1*substr($s,1))." )";
-		else
-			$sqlWhere .= " AND (id = ".(1*$s)." OR title LIKE ". $db->quoteForLike("%%%s%%",$s). " OR note LIKE ". $db->quoteForLike("%%%s%%",$s). ")";
+		$s = trim(_get('s'));
+		if($s!='')
+		{
+			if($s[0]=='#') // alternate POST version #taskid
+				$sqlWhere .= " AND (id = ".(1*substr($s,1))." )";
+			else
+				$sqlWhere .= " AND (id = ".(1*$s)." OR title LIKE ". $db->quoteForLike("%%%s%%",$s). " OR note LIKE ". $db->quoteForLike("%%%s%%",$s). ")";
+		}
 	}
 	$sort = (int)_get('sort');
 	$sqlSort = "ORDER BY compl ASC, ";

@@ -342,7 +342,7 @@ var mytinytodo = window.mytinytodo = _mtt = {
 			}
 			if(id)
 			{
-				$('#search').val('='+id); // "=" for ID search (vs. text search)
+				$('#search').val('#'+id); // "=" for ID search (vs. text search)
 				searchTasks(true);
 			}
 
@@ -1502,12 +1502,13 @@ function searchTasks(force)
 	}
 	else $('#searchbar').fadeOut('fast');
 	loadTasks();
-	if(newkeyword[0]=='=')
+	if(newkeyword[0]!='#')
+		history.pushState(null, null, window.location.pathname+'?s='+filter.search);
+	else
 	{
-		// open tasks notes in the search results
-		// TODO: only iff this result is not empty and it has a note!
+		history.pushState(null, null, window.location.pathname+'?i='+filter.search.substr(1)); // make this page addressable via a dedicated URL
+		// and open this task's notes in the search results (TODO: only iff it is not empty and it has a note!)
 		toggleAllNotes(true);
-		history.pushState(null, null, window.location.pathname+'?s='+filter.search); // make this page addressable via a dedicated URL
 	}
 	return false;
 };

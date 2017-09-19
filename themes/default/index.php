@@ -30,7 +30,7 @@
 
 <script type="text/javascript">
 
-externalSearch='<?php echo(_get('s'))?>';
+externalSearch='<?php echo(_get('i')?'#'._get('i'):_get('s'));?>';
 
 $().ready(function(){
 
