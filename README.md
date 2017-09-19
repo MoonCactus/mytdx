@@ -13,13 +13,14 @@ unambiguously.
 - in addition to existing URL, notes can also embed cross-references to other tasks (just use #taskid).
 When you click on them you are redirected to the respective task.
 
-- this cross-reference is done via an enhanced search. You can now look for "=123" to go to
-the respective task (and its notes will be opened). The prefixed "equal sign" in the search string
+- this cross-reference is done via an enhanced search. You can now look for "#123" to go to
+the respective task (and its notes will be opened). The prefixed value in the search string
 forces a search by id only. Looking for "123" will match titles, notes or ids of the tasks, which
 is still convenient to find all the tasks that refer to 123 alike.
 
-- the incomping index URL also can provide the search string (use "?s=keyword"). Thus, pointing
-directly to a specific task is done with ?s==123. This is convenient in order to send links by email, e.g.
+- the incomping index URL also can provide the search string (use "?i=taskid" or "?s=keyword"). Thus,
+pointing directly to a specific task is done with ?i=123. This is convenient in order to send links
+by email, e.g. When you want all related tasks and cross-references you way prefer "?s=123"
 
 - CSS can be customized (there are already a few special prefixes: =state, @user, !highlight). I intend
 to use them like "=acknoledges" or "=closed" for bug tracking, and be able to assign someone with @buddy.
