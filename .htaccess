@@ -1,8 +1,0 @@
-                AuthUserFile /home/www/www.tecrd.com/td/.htusers
-
-                AuthName "TecRD restricted access"
-                AuthType Basic
-
-                <limit GET POST>
-                require valid-user
-                </limit>
