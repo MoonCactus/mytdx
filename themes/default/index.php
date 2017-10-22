@@ -14,7 +14,7 @@
 <link rel="stylesheet" type="text/css" href="<?php mttinfo('template_url'); ?>pda.css?v=1.4.3" media="all" />
 <?php else: ?>
 <link rel="stylesheet" type="text/css" href="<?php mttinfo('template_url'); ?>print.css?v=1.4.3" media="print" />
-<link rel="shortcut icon" href="https://www.tecrd.com/td/favicon.ico" />
+<link rel="shortcut icon" href="favicon.ico" />
 <?php endif; ?>
 <meta name="viewport" content="width=device-width, initial-scale = 1.0, maximum-scale=2.0, user-scalable=no" />
 </head>

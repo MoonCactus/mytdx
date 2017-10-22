@@ -1,9 +1,4 @@
 <?php
-if($_SERVER["SERVER_ADDR"]!='::1' && (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != 'on'))
-{
-    header('Location: https://www.tecrd.com/td');
-    exit;
-}
 /*
 	(C) Copyright 2009-2010 myTinyTodo by Max Pozdeev <maxpozdeev@gmail.com>
 	(C) Copyright 2017      fork myTDX by Jérémie FRANCOIS <jeremie.francois@gmail.com>
