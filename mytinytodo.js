@@ -854,7 +854,7 @@ function prepareTaskStr(item, noteExp)
 		'<span title="'+item.dateCompletedInlineTitle+'">'+item.dateCompletedInline+'</span></span></div>'+"\n"+
 		'<div class="task-through">'+
 		'<a class="task-xref" tid='+id+' href="#">#'+id+'</a>'+
-		preparePrio(prio,id)+'<span class="task-title">'+item.title+'</span> '+
+		preparePrio(prio,id)+'<span class="task-title">'+dehtml(item.title)+'</span> '+
 		(curList.id == -1 ? '<span class="task-listname">'+ tabLists.get(item.listId).name +'</span>' : '') +	"\n" +
 		prepareTagsStr(item)+'<span class="task-date">'+item.dateInlineTitle+'</span></div>'+
 		'<div class="task-note-block">'+
@@ -2031,8 +2031,8 @@ function dehtml(str)
 	return str.replace(/&quot;/g,'"').replace(/&[rl]dquo;/g,'"').
 		replace(/&lt;/g,'<').replace(/&gt;/g,'>').
 		replace(/&[nm]dash;/g,'-').
-		replace(/&amp;/g,'&').
-		replace(/&#039;/g,"'").replace(/&[lr]squo;/g,"'")
+		replace(/&#039;/g,"'").replace(/&[lr]squo;/g,"'").
+		replace(/&amp;/g,'&')
 };
 
 
