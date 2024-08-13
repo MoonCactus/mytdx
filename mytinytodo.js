@@ -331,8 +331,10 @@ var mytinytodo = window.mytinytodo = _mtt = {
 
 		$('.task-xref').live('click', function(e){
 			//clear selection (see tasklistDoubleClick)
-			if(document.selection && document.selection.empty && document.selection.createRange().text) document.selection.empty();
-			else if(window.getSelection) window.getSelection().removeAllRanges();
+			if(document.selection && document.selection.empty && document.selection.createRange().text)
+				document.selection.empty();
+			else if(window.getSelection)
+				window.getSelection().removeAllRanges();
 			var id= 0;
 			if(this.getAttribute('tid'))
 				id= parseInt(this.getAttribute('tid'));
@@ -820,6 +822,7 @@ function loadTasks(opts)
 		taskCnt.total = taskCnt.past = taskCnt.today = taskCnt.soon = 0;
 		var tasks = '';
 		$.each(json.list, function(i,item){
+			item.title= item.title.replace('&amp;#','&#');  // dirty fix. We'd better fix that in task title edition dehtml() which is the source of the bug
 			tasks += prepareTaskStr(item);
 			taskList[item.id] = item;
 			taskOrder.push(parseInt(item.id));
@@ -840,9 +843,7 @@ function prepareTaskStr(item, noteExp)
 	// &mdash; = &#8212; = —
 	var id = item.id;
 	var prio = item.prio;
-
 	var notes = prepareHtml(item.note.replace(/<br[^>]*>/ig,''), true);
-
 	return '<li id="taskrow_'+id+'" class="' + (item.compl?'task-completed ':'') + item.dueClass + (item.note!=''?' task-has-note':'') +
 				((curList.showNotes && item.note != '') || noteExp ? ' task-expanded' : '') + prepareTagsClass(item.tags_ids) + '">' +
 		'<div class="task-actions"><a href="#" class="taskactionbtn"></a></div>'+"\n"+
@@ -853,7 +854,7 @@ function prepareTaskStr(item, noteExp)
 		'<span title="'+item.dateCompletedInlineTitle+'">'+item.dateCompletedInline+'</span></span></div>'+"\n"+
 		'<div class="task-through">'+
 		'<a class="task-xref" tid='+id+' href="#">#'+id+'</a>'+
-		preparePrio(prio,id)+'<span class="task-title">'+prepareHtml(item.title)+'</span> '+
+		preparePrio(prio,id)+'<span class="task-title">'+item.title+'</span> '+
 		(curList.id == -1 ? '<span class="task-listname">'+ tabLists.get(item.listId).name +'</span>' : '') +	"\n" +
 		prepareTagsStr(item)+'<span class="task-date">'+item.dateInlineTitle+'</span></div>'+
 		'<div class="task-note-block">'+
@@ -879,8 +880,18 @@ function prepareHtml(s, enableMarkdown=false)
 		s = s.replace(/(^|\s|>)(www\.([\w\#$%&~\/.\-\+;:=,\?\[\]@]+?))(,|\.|:|)?(?=\s|&quot;|&lt;|&gt;|\"|<|>|$)/gi, '$1<a href="http://$2" target="_blank">$2</a>$4');
 		s = s.replace(/(^|\s|>)((?:http|https|ftp):\/\/([\w\#$%&~\/.\-\+;:=,\?\[\]@]+?))(,|\.|:|)?(?=\s|&quot;|&lt;|&gt;|\"|<|>|$)/ig, '$1<a href="$2" target="_blank">$2</a>$4');
 	}
-	// We alsway make #nnn xrefs clickable as well
-	s = s.replace(/#([0-9]+)/g, '<a class="task-xref" tid=$1 href="#">#$1</a>');
+	
+	// Make #nnn xrefs clickable as well
+	s = s.replace(/([^&;]#)([0-9]+)\b/g, function(match, prefix,taskIndex, offset, input_string)
+    {
+		// Title often fails beacuse the entire list may not be loaded already :/
+		let id = parseInt(taskIndex);
+		let title = '';
+		if(typeof taskList[id] != 'undefined')
+			title= ' title="' + taskList[id].title + '"';
+        return prefix + '<a ' + title + ' class="task-xref" tid=' + taskIndex + ' href="#">' + taskIndex+'</a>';
+	});
+
 	return s;
 };
 
@@ -1358,7 +1369,7 @@ function editTask(id)
 	// no need to clear form
 
 	var form = document.getElementById('taskedit_form');
-	form.task.value = dehtml(item.title);
+	form.task.value = dehtml(item.title);  // because it is an <input type=text> :(
 	form.note.value = item.noteText;
 	form.id.value = item.id;
 	form.tags.value = item.tags.split(',').join(', ');
@@ -1398,7 +1409,7 @@ function showEditForm(isAdd)
 		{
 			_mtt.db.request('parseTaskStr', { list:curList.id, title:$('#task').val(), tag:_mtt.filter.getTags() }, function(json){
 				if(!json) return;
-				form.task.value = json.title
+				form.task.value = json.title;
 				form.tags.value = (form.tags.value != '') ? form.tags.value +', '+ json.tags : json.tags;
 				form.prio.value = json.prio;
 				$('#task').val('');
@@ -2017,7 +2028,11 @@ function isParentId(el, id)
 
 function dehtml(str)
 {
-	return str.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+	return str.replace(/&quot;/g,'"').replace(/&[rl]dquo;/g,'"').
+		replace(/&lt;/g,'<').replace(/&gt;/g,'>').
+		replace(/&[nm]dash;/g,'-').
+		replace(/&amp;/g,'&').
+		replace(/&#039;/g,"'").replace(/&[lr]squo;/g,"'")
 };
 
 
